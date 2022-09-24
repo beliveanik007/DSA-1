@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+
+void Swap(int &a, int &b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+}
+int findMinIndex(int arr[], int i, int n) // here n is the size of the array
+{
+
+    int minimum = arr[i];
+    int index = i;
+
+    for(int j = i+1;j<n;j++)
+    {
+        if(arr[j]<minimum)
+        {
+            minimum = arr[j];
+            index = j;
+        }
+    }
+    return index;
+}
+
+void SelectionSort(int arr[], int n)
+{
+    for(int i=0;i<n-1;i++)
+    {
+        int minIndex = findMinIndex(arr, i, n);
+        Swap(arr[i], arr[minIndex]);
+    }
+    return;
+}
+int main()
+{
+    int arr[5] = {7, 2, 5, 4, 1};
+    int n = 5;
+    SelectionSort(arr, n);
+    for(int i=0; i<n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    return 0;
+}
