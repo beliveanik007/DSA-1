@@ -1,0 +1,27 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+int main()
+{
+    stack< int > st;
+    st.push(5);
+    st.push(7);
+    st.push(11);
+    st.push(13);
+
+    cout << "Size of the stack: " << st.size() << endl;
+
+    cout << "Top element of the stack: " << st.top() << endl;
+    st.pop();
+    cout << "Top element of the stack: " << st.top() << endl;
+
+    while(!st.empty())
+    {
+        st.pop();
+    }
+
+    if(st.empty()) cout << "Stack is empty.\n";
+    else cout << "Stack is not empty.\n";
+
+    return 0;
+}
