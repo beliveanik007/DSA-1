@@ -1,0 +1,51 @@
+class Solution {
+public:
+    const int dx[4] = {1, -1, 0, 0};
+    const int dy[4] = {0, 0, 1, -1};
+ 
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int row = image.size();
+        int column = image[0].size();
+        int visited[row][column];
+        memset(visited, 0, sizeof(visited));
+ 
+ 
+        queue< pair< int, int > > q;
+        q.push({sr, sc});
+ 
+        auto isValid = [&](int i, int j)
+        {
+            return i>=0 && i<row && j>=0 && j<column;
+        };
+ 
+        while(!q.empty())
+        {
+            pair< int , int > startToVisit = q.front();
+            q.pop();
+ 
+            for(int i=0; i<4; i++)
+            {
+                int newRow = startToVisit.first + dx[i];
+                int newColumn = startToVisit.second + dy[i];
+ 
+                if(isValid(newRow, newColumn) && visited[newRow][newColumn]==0 && image[newRow][newColumn]==image[startToVisit.first][startToVisit.second])
+                {
+                    q.push({newRow, newColumn});
+                }
+            }
+            visited[startToVisit.first][startToVisit.second] = 1;
+        }
+ 
+ 
+        for(int i=0; i<row; i++)
+        {
+            for(int j=0; j<column; j++)
+            {
+                if(visited[i][j]==1)
+                    image[i][j] = color;
+            }
+        }
+        return image;
+ 
+    }
+};
