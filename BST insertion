@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+#define newline cout<<endl;
+using namespace std;
+
+struct TreeNode
+{
+    int value;
+    TreeNode* left;
+    TreeNode* right;
+};
+
+TreeNode* createTreeNode(int data)
+{
+    /// TreeNode* temp = (TreeNode *)malloc(sizeof(Tree));
+    TreeNode* temp = new TreeNode();
+    temp->value = data;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+TreeNode* Insert(TreeNode* root, int data)
+{
+    if(root==NULL)
+    {
+        root = createTreeNode(data);
+        return root;
+    }
+
+    if(data < root->value)
+        root->left = Insert(root->left, data);
+    else
+        root->right = Insert(root->right, data);
+    return root;
+}
+
+
+void inorder(TreeNode* root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left);
+        cout << root->value << " ";
+        inorder(root->right);
+    }
+}
+
+int main()
+{
+    TreeNode* root = NULL;
+
+    int arr[15] = {100, 90,80,70, 75, 85, 95, 110, 105, 107, 109, 125, 123, 127, 87};
+
+    for(int i=0; i<15; i++)
+    {
+        root = Insert(root, arr[i]);
+    }
+    inorder(root);
+    newline
+
+    return 0;
+}
