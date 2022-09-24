@@ -1,0 +1,84 @@
+#include<iostream>
+using namespace std;
+struct ListNode
+{
+    int value;
+    ListNode* next;
+    ListNode* prev;
+};
+ListNode* head = NULL;
+ListNode* tail = NULL;
+
+ListNode* createListNode(int value)
+{
+    ListNode* temp = (ListNode *)malloc(sizeof(ListNode));
+    temp->value = value;
+    temp->next = temp->prev = NULL;
+    return temp;
+}
+
+bool isEmpty()
+{
+    return head==NULL;
+}
+
+int top()
+{
+    return tail==NULL ? -1 : tail->value;
+}
+
+void push(int value)
+{
+    if(head==NULL)
+    {
+        head = createListNode(value);
+        tail = head;
+    }
+    else
+    {
+        ListNode* temp = createListNode(value);
+        tail->next = temp;
+        temp->prev = tail;
+        tail = temp;
+        temp = NULL;
+    }
+}
+
+void pop()
+{
+    if(tail==NULL)
+    {
+        printf("Stack Underflow.\n");
+        return;
+    }
+
+    ListNode* temp = tail;
+    tail = tail->prev;
+    tail->next = NULL;
+    free(temp);
+}
+
+int main()
+{
+    push(10);
+    push(12);
+    push(14);
+    push(11);
+    push(9);
+    push(14);
+    pop();
+    pop();
+    push(120);
+    printf("Top element: %d\n", top());
+    pop();
+    pop();
+    pop();
+    pop();
+
+    if(isEmpty())
+        printf("Stack is Empty.\n");
+    else
+        printf("Stack is not empty.\n");
+
+    return 0;
+}
