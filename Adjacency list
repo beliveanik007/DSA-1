@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    freopen("input.txt", "r", stdin);
+    int V, E;
+    cin >> V >> E;
+    vector< int > Graph[V];
+
+    for(int i=0; i<E; i++)
+    {
+        int u, v; cin >> u >> v;
+        Graph[u].push_back(v);
+        Graph[v].push_back(u);
+    }
+
+
+    for(int i=0; i<V; i++)
+    {
+        cout << i << " --> ";
+        for(int j=0; j<Graph[i].size(); j++)
+            cout << Graph[i][j] << " ";
+        cout << endl;
+    }
+    return 0;
+}
