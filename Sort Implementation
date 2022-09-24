@@ -1,0 +1,40 @@
+#include<stdio.h>
+/*
+To find the the Kth minimum value from the array, you need to sort the array first.
+Then (K-1) th element in the array is the Kth minimum value as array indexing starts from zero in C/C++/Java.
+You don't need to handle any corner case for this online.
+To handle the corner case, if the Kth minimum is not present in the array which means K>n, then you can return -1.
+*/
+int FindKthMinimum(int arr[], int n, int K)
+{
+    // sorting using Bubble Sort
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=0; j<n-1-i;j++)
+        {
+            if(arr[j]>arr[j+1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+    return arr[K-1];
+}
+
+int main()
+{
+    int n; scanf("%d", &n);
+    int arr[n];
+
+    for(int i=0; i<n; i++)
+        scanf("%d", &arr[i]);
+
+    int K; scanf("%d",&K);
+
+    int KthMinimum = FindKthMinimum(arr, n, K);
+    printf("The Kth Minimum Element of the array is: %d\n", KthMinimum);
+
+    return 0;
+}
